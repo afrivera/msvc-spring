@@ -6,11 +6,13 @@ import com.afrivera.course.entity.CourseEntity;
 import com.afrivera.course.persistence.ICourseRepository;
 import com.afrivera.course.service.ICourseService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
+@Service
 public class CourseServiceImpl implements ICourseService {
 
     private final ICourseRepository courseRepository;
