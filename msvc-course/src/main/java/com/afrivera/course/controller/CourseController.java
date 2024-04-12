@@ -1,5 +1,6 @@
-package com.afrivera.course.controller.dto;
+package com.afrivera.course.controller;
 
+import com.afrivera.course.controller.dto.CourseResponse;
 import com.afrivera.course.service.ICourseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
