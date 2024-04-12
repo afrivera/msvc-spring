@@ -17,6 +17,7 @@
 	<modules>
 		<module>msvc-course</module>
 		<module>msvc-eureka</module>
+		<module>msvc-student</module>
 	</modules>
 
 	<properties>
