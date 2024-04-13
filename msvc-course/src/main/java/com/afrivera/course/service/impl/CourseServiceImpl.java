@@ -1,8 +1,11 @@
 package com.afrivera.course.service.impl;
 
+import com.afrivera.course.client.StudentClient;
 import com.afrivera.course.controller.dto.CourseRequest;
 import com.afrivera.course.controller.dto.CourseResponse;
+import com.afrivera.course.controller.dto.StudentDTO;
 import com.afrivera.course.entity.CourseEntity;
+import com.afrivera.course.http.response.StudentByCourseResponse;
 import com.afrivera.course.persistence.ICourseRepository;
 import com.afrivera.course.service.ICourseService;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +19,7 @@ import java.util.stream.Collectors;
 public class CourseServiceImpl implements ICourseService {
 
     private final ICourseRepository courseRepository;
+    private final StudentClient studentClient;
 
     @Override
     public List<CourseResponse> findAll() {
@@ -51,5 +55,21 @@ public class CourseServiceImpl implements ICourseService {
                 .courseId(ce.getId())
                 .name(ce.getName())
                 .build();
+    }
+
+    @Override
+    public StudentByCourseResponse findStudentByCourseId(Long courseId){
+        // consultar si existe el curso
+        CourseEntity ce = courseRepository.findById(courseId).orElseThrow();
+
+        // obtener estudiantes
+        List<StudentDTO> students = studentClient.findallStudentByCourseId(courseId);
+
+        return StudentByCourseResponse.builder()
+                .courseName(ce.getName())
+                .teacher(ce.getTeacher())
+                .students(students)
+                .build();
+
     }
 }

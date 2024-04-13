@@ -2,6 +2,7 @@ package com.afrivera.course.controller;
 
 import com.afrivera.course.controller.dto.CourseRequest;
 import com.afrivera.course.controller.dto.CourseResponse;
+import com.afrivera.course.http.response.StudentByCourseResponse;
 import com.afrivera.course.service.ICourseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,11 @@ public class CourseController {
     @PostMapping
     public ResponseEntity<CourseResponse> saveCourse(@RequestBody CourseRequest course){
         return new ResponseEntity<>(courseService.save(course), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{id}/students")
+    public ResponseEntity<StudentByCourseResponse> findStudentsByCourse(@PathVariable Long id){
+        return ResponseEntity.ok(courseService.findStudentByCourseId(id));
     }
 
 }
