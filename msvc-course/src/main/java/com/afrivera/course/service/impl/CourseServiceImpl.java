@@ -20,22 +20,36 @@ public class CourseServiceImpl implements ICourseService {
     @Override
     public List<CourseResponse> findAll() {
         return courseRepository.findAll().stream()
-                .map( course -> {
+                .map(course -> {
                     CourseResponse cr = new CourseResponse();
                     cr.setCourseId(course.getId());
                     cr.setName(course.getName());
                     cr.setTeacher(course.getTeacher());
-                    return  cr;
+                    return cr;
                 }).collect(Collectors.toList());
     }
 
     @Override
     public CourseResponse findById(Long id) {
-        return null;
+        CourseEntity ce = courseRepository.findById(id).orElseThrow();
+
+        return CourseResponse.builder()
+                .name(ce.getName())
+                .courseId(ce.getId())
+                .teacher(ce.getTeacher())
+                .build();
     }
 
     @Override
     public CourseResponse save(CourseRequest cr) {
-        return null;
+        CourseEntity ce = courseRepository.save(CourseEntity.builder()
+                .name(cr.getName())
+                .teacher(cr.getTeacher())
+                .build());
+        return CourseResponse.builder()
+                .teacher(ce.getName())
+                .courseId(ce.getId())
+                .name(ce.getName())
+                .build();
     }
 }

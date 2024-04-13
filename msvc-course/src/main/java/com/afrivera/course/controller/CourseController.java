@@ -1,13 +1,12 @@
 package com.afrivera.course.controller;
 
+import com.afrivera.course.controller.dto.CourseRequest;
 import com.afrivera.course.controller.dto.CourseResponse;
 import com.afrivera.course.service.ICourseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,4 +21,15 @@ public class CourseController {
     public ResponseEntity<List<CourseResponse>> getAllCourse(){
         return new ResponseEntity<>(courseService.findAll(), HttpStatus.OK);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CourseResponse> findCourseById(@PathVariable Long id){
+        return ResponseEntity.ok(courseService.findById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<CourseResponse> saveCourse(@RequestBody CourseRequest course){
+        return new ResponseEntity<>(courseService.save(course), HttpStatus.CREATED);
+    }
+
 }
