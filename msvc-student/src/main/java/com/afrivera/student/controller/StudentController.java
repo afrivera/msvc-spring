@@ -3,10 +3,9 @@ package com.afrivera.student.controller;
 import com.afrivera.student.entity.StudentEntity;
 import com.afrivera.student.service.IStudentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,4 +22,18 @@ public class StudentController {
         return ResponseEntity.ok(studentService.findAll());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<StudentEntity> getStudentById(@PathVariable Long id){
+        return ResponseEntity.ok(studentService.findById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<StudentEntity> saveStudent(@RequestBody StudentEntity student){
+        return new ResponseEntity(studentService.save(student), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/search-course/{courseId}")
+    public ResponseEntity<List<StudentEntity>> findByIdCourse(@PathVariable Long courseId){
+        return ResponseEntity.ok(studentService.findByCourseId(courseId));
+    }
 }
