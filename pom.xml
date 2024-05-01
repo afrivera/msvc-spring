@@ -19,6 +19,7 @@
 		<module>msvc-eureka</module>
 		<module>msvc-student</module>
 		<module>msvc-gateway</module>
+		<module>msvc-config</module>
 	</modules>
 
 	<properties>
