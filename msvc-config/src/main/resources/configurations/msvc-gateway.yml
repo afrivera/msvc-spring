@@ -15,10 +15,10 @@ spring:
           enable: true
       routes:
         - id: students
-          uri: http://localhost:8581/
+          uri: lb://msvc-student
           predicates:
             - Path=/Student/v1/**
         - id: courses
-          uri: http://localhost:8580/
+          uri: lb://msvc-course
           predicates:
             - Path=/Course/v1/**
