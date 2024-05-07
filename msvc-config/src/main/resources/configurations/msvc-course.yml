@@ -1,0 +1,24 @@
+server:
+  port: 8580
+
+spring:
+  application:
+    name: msvc-course
+  datasource:
+    url: jdbc:postgresql://localhost:5432/msvc_course
+    username: afrivera
+    password: afrivera
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+    database: postgresql
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
